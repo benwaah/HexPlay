@@ -1,21 +1,16 @@
 package;
 
-import geom.Point;
-import helper.HexHelper;
+import geom.Hex;
 import kha.Framebuffer;
-import kha.Color;
 
 class Project {
-	static public inline var HEX_SIZE = 32.0;
-
-	public var corners:Array<Point>;
+	public var hexes:Array<Hex>;
 
 	public function new() {
-		var center:Point = new Point(128, 128);
-		corners = new Array<Point>();
-		for (i in 0 ... 6) {
-			var res = HexHelper.hexCorner(center, HEX_SIZE, i);
-			corners.push(res);
+		hexes = new Array<Hex>();
+		for (i in 0 ... 10) {
+			hexes.push(new Hex(Math.round(Math.random() * 800),
+							   Math.round(Math.random() * 600)));
 		}
 	}
 
@@ -26,10 +21,8 @@ class Project {
 	public function render(framebuffer:Framebuffer):Void {
 		var g = framebuffer.g2;
 		g.begin();
-		var prevCorner = corners[corners.length - 1];
-		for (i in 0 ... corners.length) {
-			g.drawLine(prevCorner.x, prevCorner.y, corners[i].x, corners[i].y);
-			prevCorner = corners[i];
+		for (i in 0 ... hexes.length) {
+			hexes[i].render(g);
 		}
 		g.end();
 	}

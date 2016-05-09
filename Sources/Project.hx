@@ -1,12 +1,15 @@
 package;
 
 import geom.Hex;
+import helper.HexHelper;
 import kha.Framebuffer;
 
 class Project {
 	public var hexes:Array<Hex>;
 
 	public function new() {
+		HexHelper.pointyTopped = true;
+
 		hexes = new Array<Hex>();
 		for (i in 0 ... 10) {
 			hexes.push(new Hex(Math.round(Math.random() * 800),

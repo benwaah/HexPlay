@@ -1,0 +1,7 @@
+version=2.1.2
+src=Tests
+bin=build
+report=report
+hxml=test.hxml
+classPaths=Sources
+resources=Assets

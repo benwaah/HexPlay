@@ -1,6 +1,8 @@
 package;
 
+import config.Config;
 import geom.Hex;
+import geom.Point;
 import helper.HexHelper;
 import kha.Framebuffer;
 import kha.input.Mouse;
@@ -14,7 +16,6 @@ class Project {
 			hexes.push(new Hex(Math.round(Math.random() * 800),
 							   Math.round(Math.random() * 600)));
 		}
-
 		Mouse.get().notify(onMouseDown, null, null, null);
 	}
 
@@ -23,12 +24,19 @@ class Project {
 	}
 
 	public function render(framebuffer:Framebuffer):Void {
-		var g = framebuffer.g2;
-		g.begin();
+		var graphics = framebuffer.g2;
+		graphics.begin();
 		for (i in 0 ... hexes.length) {
-			hexes[i].render(g);
+			var center = new Point(hexes[i].q, hexes[i].r);
+			// TODO: convert (q, r) position to real (x, y) position
+			var prevCorner = HexHelper.hexCorner(center, Config.HEX_SIZE, 5);
+			for (i in 0 ... 6) {
+				var corner = HexHelper.hexCorner(center, Config.HEX_SIZE, i);
+				graphics.drawLine(prevCorner.x, prevCorner.y, corner.x, corner.y);
+				prevCorner = corner;
+			}
 		}
-		g.end();
+		graphics.end();
 	}
 
 	public function onMouseDown(button:Int, x:Int, y:Int) {

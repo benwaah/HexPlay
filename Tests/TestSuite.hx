@@ -1,5 +1,6 @@
 import massive.munit.TestSuite;
 
+import geom.HexTest;
 import helper.HexHelperTest;
 
 /**
@@ -14,6 +15,7 @@ class TestSuite extends massive.munit.TestSuite
 	{
 		super();
 
+		add(geom.HexTest);
 		add(helper.HexHelperTest);
 	}
 }

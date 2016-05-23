@@ -20,7 +20,6 @@ class Project {
 	}
 
 	public function update():Void {
-
 	}
 
 	public function render(framebuffer:Framebuffer):Void {

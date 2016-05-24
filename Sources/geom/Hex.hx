@@ -1,6 +1,15 @@
 package geom;
 
 class Hex {
+	static private var _directions = [
+		new Hex(1, 0), new Hex(1, -1), new Hex(0, -1),
+		new Hex(-1, 0), new Hex(-1, 1), new Hex(0, 1)
+	];
+
+	static public function direction(direction:Int):Hex {
+		return _directions[(6 + direction % 6) % 6];
+	}
+
 	public var q(get, null):Int = 0;
 	public var r(get, null):Int = 0;
 	public var s(get, null):Int;

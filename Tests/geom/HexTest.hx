@@ -35,4 +35,42 @@ class HexTest
 		Assert.areEqual(2, h.r);
 		Assert.areEqual(-4, h.s);
 	}
+
+	@Test
+	public function testDirections():Void {
+		Assert.areEqual(1, Hex.direction(0).q);
+		Assert.areEqual(0, Hex.direction(0).r);
+		Assert.areEqual(-1, Hex.direction(0).s);
+		Assert.areEqual(1, Hex.direction(1).q);
+		Assert.areEqual(-1, Hex.direction(1).r);
+		Assert.areEqual(0, Hex.direction(1).s);
+		Assert.areEqual(0, Hex.direction(2).q);
+		Assert.areEqual(-1, Hex.direction(2).r);
+		Assert.areEqual(1, Hex.direction(2).s);
+		Assert.areEqual(-1, Hex.direction(3).q);
+		Assert.areEqual(0, Hex.direction(3).r);
+		Assert.areEqual(1, Hex.direction(3).s);
+		Assert.areEqual(-1, Hex.direction(4).q);
+		Assert.areEqual(1, Hex.direction(4).r);
+		Assert.areEqual(0, Hex.direction(4).s);
+		Assert.areEqual(0, Hex.direction(5).q);
+		Assert.areEqual(1, Hex.direction(5).r);
+		Assert.areEqual(-1, Hex.direction(5).s);
+	}
+
+	@Test
+	public function testDirectionsAreCyclic() {
+		Assert.areEqual(Hex.direction(0), Hex.direction(6));
+		Assert.areEqual(Hex.direction(0), Hex.direction(-6));
+		Assert.areEqual(Hex.direction(1), Hex.direction(7));
+		Assert.areEqual(Hex.direction(1), Hex.direction(-5));
+		Assert.areEqual(Hex.direction(2), Hex.direction(8));
+		Assert.areEqual(Hex.direction(2), Hex.direction(-4));
+		Assert.areEqual(Hex.direction(3), Hex.direction(9));
+		Assert.areEqual(Hex.direction(3), Hex.direction(-3));
+		Assert.areEqual(Hex.direction(4), Hex.direction(10));
+		Assert.areEqual(Hex.direction(4), Hex.direction(-2));
+		Assert.areEqual(Hex.direction(5), Hex.direction(11));
+		Assert.areEqual(Hex.direction(5), Hex.direction(-1));
+	}
 }

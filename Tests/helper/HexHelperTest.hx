@@ -234,4 +234,63 @@ class HexHelperTest
 		Assert.areEqual(h1.distance(h3), h3.distance(h1));
 		Assert.areEqual(h2.distance(h3), h3.distance(h2));
 	}
+
+	@Test
+	public function testNeighbouring():Void {
+		var h = new Hex(2, 3);
+		var h0 = HexHelper.neighbour(h, 0);
+		Assert.areEqual(3, h0.q);
+		Assert.areEqual(3, h0.r);
+		Assert.areEqual(-6, h0.s);
+		var h1 = HexHelper.neighbour(h, 1);
+		Assert.areEqual(3, h1.q);
+		Assert.areEqual(2, h1.r);
+		Assert.areEqual(-5, h1.s);
+		var h2 = HexHelper.neighbour(h, 2);
+		Assert.areEqual(2, h2.q);
+		Assert.areEqual(2, h2.r);
+		Assert.areEqual(-4, h2.s);
+		var h3 = HexHelper.neighbour(h, 3);
+		Assert.areEqual(1, h3.q);
+		Assert.areEqual(3, h3.r);
+		Assert.areEqual(-4, h3.s);
+		var h4 = HexHelper.neighbour(h, 4);
+		Assert.areEqual(1, h4.q);
+		Assert.areEqual(4, h4.r);
+		Assert.areEqual(-5, h4.s);
+		var h5 = HexHelper.neighbour(h, 5);
+		Assert.areEqual(2, h5.q);
+		Assert.areEqual(4, h5.r);
+		Assert.areEqual(-6, h5.s);
+	}
+
+
+	@Test
+	public function testNeighbourReciprocityUsing():Void {
+		var h = new Hex(2, 3);
+		var h0 = h.neighbour(0);
+		var h1 = h.neighbour(1);
+		var h2 = h.neighbour(2);
+		var h3 = h.neighbour(3);
+		var h4 = h.neighbour(4);
+		var h5 = h.neighbour(5);
+		Assert.areEqual(h.q, h0.neighbour(3).q);
+		Assert.areEqual(h.r, h0.neighbour(3).r);
+		Assert.areEqual(h.s, h0.neighbour(3).s);
+		Assert.areEqual(h.q, h1.neighbour(4).q);
+		Assert.areEqual(h.r, h1.neighbour(4).r);
+		Assert.areEqual(h.s, h1.neighbour(4).s);
+		Assert.areEqual(h.q, h2.neighbour(5).q);
+		Assert.areEqual(h.r, h2.neighbour(5).r);
+		Assert.areEqual(h.s, h2.neighbour(5).s);
+		Assert.areEqual(h.q, h3.neighbour(0).q);
+		Assert.areEqual(h.r, h3.neighbour(0).r);
+		Assert.areEqual(h.s, h3.neighbour(0).s);
+		Assert.areEqual(h.q, h4.neighbour(1).q);
+		Assert.areEqual(h.r, h4.neighbour(1).r);
+		Assert.areEqual(h.s, h4.neighbour(1).s);
+		Assert.areEqual(h.q, h5.neighbour(2).q);
+		Assert.areEqual(h.r, h5.neighbour(2).r);
+		Assert.areEqual(h.s, h5.neighbour(2).s);
+	}
 }

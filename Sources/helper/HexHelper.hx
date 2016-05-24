@@ -59,4 +59,8 @@ class HexHelper {
 	static public function distance(a:Hex, b:Hex) {
 		return length(substract(a, b));
 	}
+
+	static public function neighbour(h:Hex, direction:Int) {
+		return add(h, Hex.direction(direction));
+	}
 }

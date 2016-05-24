@@ -188,4 +188,50 @@ class HexHelperTest
 		Assert.areEqual(3, h2.r);
 		Assert.areEqual(-15, h2.s);
 	}
+
+	@Test
+	public function testLength():Void {
+		var h1 = new Hex(0, 0);
+		Assert.areEqual(0, HexHelper.length(h1));
+		var h2 = new Hex(1, -1);
+		Assert.areEqual(1, HexHelper.length(h2));
+		var h3 = new Hex(1, 1);
+		Assert.areEqual(2, HexHelper.length(h3));
+	}
+
+	@Test
+	public function testLengthUsing():Void {
+		var h1 = new Hex(0, 0);
+		Assert.areEqual(0, h1.length());
+		var h2 = new Hex(4, -2);
+		Assert.areEqual(4, h2.length());
+		var h3 = new Hex(-1, -5);
+		Assert.areEqual(6, h3.length());
+	}
+
+	@Test
+	public function testDistance():Void {
+		var h1 = new Hex(0, 0);
+		var h2 = new Hex(1, -1);
+		var h3 = new Hex(1, 1);
+		Assert.areEqual(1, HexHelper.distance(h1, h2));
+		Assert.areEqual(2, HexHelper.distance(h1, h3));
+		Assert.areEqual(2, HexHelper.distance(h2, h3));
+		Assert.areEqual(HexHelper.distance(h1, h2), HexHelper.distance(h2, h1));
+		Assert.areEqual(HexHelper.distance(h1, h3), HexHelper.distance(h3, h1));
+		Assert.areEqual(HexHelper.distance(h2, h3), HexHelper.distance(h3, h2));
+	}
+
+	@Test
+	public function testDistanceUsing():Void {
+		var h1 = new Hex(0, 0);
+		var h2 = new Hex(4, -2);
+		var h3 = new Hex(-1, -5);
+		Assert.areEqual(4, h1.distance(h2));
+		Assert.areEqual(6, h1.distance(h3));
+		Assert.areEqual(8, h2.distance(h3));
+		Assert.areEqual(h1.distance(h2), h2.distance(h1));
+		Assert.areEqual(h1.distance(h3), h3.distance(h1));
+		Assert.areEqual(h2.distance(h3), h3.distance(h2));
+	}
 }

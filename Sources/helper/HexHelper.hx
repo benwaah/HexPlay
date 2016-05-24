@@ -40,15 +40,23 @@ class HexHelper {
 		return new Hex(q, r);
 	}
 
-	public static function add(a:Hex, b:Hex):Hex {
+	static public function add(a:Hex, b:Hex):Hex {
 		return new Hex(a.q + b.q, a.r + b.r, a.s + b.s);
 	}
 
-	public static function substract(a:Hex, b:Hex):Hex {
+	static public function substract(a:Hex, b:Hex):Hex {
 		return new Hex(a.q - b.q, a.r - b.r, a.s - b.s);
 	}
 
-	public static function multiply(a:Hex, k:Int):Hex {
+	static public function multiply(a:Hex, k:Int):Hex {
 		return new Hex(a.q * k, a.r * k, a.s * k);
+	}
+
+	static public function length(h:Hex):Int {
+		return Math.round((Math.abs(h.q) + Math.abs(h.r) + Math.abs(h.s)) / 2);
+	}
+
+	static public function distance(a:Hex, b:Hex) {
+		return length(substract(a, b));
 	}
 }

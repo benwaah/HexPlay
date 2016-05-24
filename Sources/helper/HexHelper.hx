@@ -39,4 +39,16 @@ class HexHelper {
 		var r = Math.round(offset.row - (offset.col - (offset.col & 1)) / 2);
 		return new Hex(q, r);
 	}
+
+	public static function add(a:Hex, b:Hex):Hex {
+		return new Hex(a.q + b.q, a.r + b.r, a.s + b.s);
+	}
+
+	public static function substract(a:Hex, b:Hex):Hex {
+		return new Hex(a.q - b.q, a.r - b.r, a.s - b.s);
+	}
+
+	public static function multiply(a:Hex, k:Int):Hex {
+		return new Hex(a.q * k, a.r * k, a.s * k);
+	}
 }

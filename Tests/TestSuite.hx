@@ -2,6 +2,7 @@ import massive.munit.TestSuite;
 
 import geom.HexTest;
 import helper.HexHelperTest;
+import helper.LayoutHelperTest;
 
 /**
  * Auto generated Test Suite for MassiveUnit.
@@ -17,5 +18,6 @@ class TestSuite extends massive.munit.TestSuite
 
 		add(geom.HexTest);
 		add(helper.HexHelperTest);
+		add(helper.LayoutHelperTest);
 	}
 }

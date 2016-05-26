@@ -20,4 +20,20 @@ class LayoutHelper {
 		var r:Int = Math.round(o.b2 * pt.x + o.b3 * pt.y);
 		return new Hex(q, r);
 	}
+
+	static public function corner(layout:Layout, corner:Int):Point {
+		var size = layout.size;
+		var angle = 2 * Math.PI * (corner + layout.orientation.startAngle) / 6;
+		return new Point(size.x * Math.cos(angle), size.y * Math.sin(angle));
+	}
+
+	static public function hexCorners(layout:Layout, h:Hex):Array<Point> {
+		var corners = new Array<Point>();
+		var center = hexToPixel(layout, h);
+		for (i in 0...6) {
+			var offset = corner(layout, i);
+			corners.push(new Point(center.x + offset.x, center.y + offset.y));
+		}
+		return corners;
+	}
 }

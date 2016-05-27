@@ -26,3 +26,15 @@
 -D test
 #-D HXCPP_M64
 -cpp build/cpp_tests
+
+--next
+
+## Neko for headless test run
+-main TestMain
+-lib munit
+-lib kha
+-cp Sources
+-cp Tests
+-D test
+#-D HXCPP_M64
+-neko build/tests_tests.n

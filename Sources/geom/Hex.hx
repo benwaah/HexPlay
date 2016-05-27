@@ -22,7 +22,7 @@ class Hex {
 		else
 			s = _s;
 		if (q + r + s != 0) {
-			throw("Invalid coordinates for Hex");
+			throw "Invalid coordinates for Hex";
 		}
 	}
 

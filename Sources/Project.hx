@@ -2,20 +2,23 @@ package;
 
 import config.Config;
 import geom.Hex;
+import geom.Layout;
+import geom.Orientation;
 import geom.Point;
-import helper.HexHelper;
 import kha.Framebuffer;
 import kha.input.Mouse;
 
+using helper.LayoutHelper;
+
 class Project {
+	public var layouts:Array<Layout>;
 	public var hexes:Array<Hex>;
 
+	private var currentLayout:Int = 0;
+
 	public function new() {
-		hexes = new Array<Hex>();
-		for (i in 0 ... 10) {
-			hexes.push(new Hex(Math.round(Math.random() * 800),
-							   Math.round(Math.random() * 600)));
-		}
+		createLayouts();
+		createHexes();
 		Mouse.get().notify(onMouseDown, null, null, null);
 	}
 
@@ -26,11 +29,10 @@ class Project {
 		var graphics = framebuffer.g2;
 		graphics.begin();
 		for (i in 0 ... hexes.length) {
-			var center = new Point(hexes[i].q, hexes[i].r);
-			// TODO: convert (q, r) position to real (x, y) position
-			var prevCorner = HexHelper.hexCorner(center, Config.HEX_SIZE, 5);
+			var corners = layouts[currentLayout].hexCorners(hexes[i]);
+			var prevCorner = corners[5];
 			for (i in 0 ... 6) {
-				var corner = HexHelper.hexCorner(center, Config.HEX_SIZE, i);
+				var corner = corners[i];
 				graphics.drawLine(prevCorner.x, prevCorner.y, corner.x, corner.y);
 				prevCorner = corner;
 			}
@@ -38,10 +40,39 @@ class Project {
 		graphics.end();
 	}
 
-	public function onMouseDown(button:Int, x:Int, y:Int) {
+	private function createLayouts():Void {
+		var origin = new Point(400, 300);
+		layouts = new Array<Layout>();
+		layouts.push(new Layout(Orientation.LAYOUT_FLAT, new Point(20, 20), origin));
+		layouts.push(new Layout(Orientation.LAYOUT_POINTY, new Point(20, 20), origin));
+		layouts.push(new Layout(Orientation.LAYOUT_FLAT, new Point(10, 10), origin));
+		layouts.push(new Layout(Orientation.LAYOUT_POINTY, new Point(10, 10), origin));
+		layouts.push(new Layout(Orientation.LAYOUT_FLAT, new Point(40, 40), origin));
+		layouts.push(new Layout(Orientation.LAYOUT_POINTY, new Point(40, 40), origin));
+		layouts.push(new Layout(Orientation.LAYOUT_FLAT, new Point(15, 25), origin));
+		layouts.push(new Layout(Orientation.LAYOUT_POINTY, new Point(15, 25), origin));
+		layouts.push(new Layout(Orientation.LAYOUT_FLAT, new Point(25, 15), origin));
+		layouts.push(new Layout(Orientation.LAYOUT_POINTY, new Point(25, 15), origin));
+	}
+
+	private function createHexes():Void {
+		hexes = new Array<Hex>();
+		for (s in -3...4) {
+			for (r in -3...4) {
+				for (q in -3...4) {
+					if (q + r + s == 0) {
+						hexes.push(new Hex(q, r, s));
+						trace("Hex added: " + q + ", " + r + ", " + s);
+					}
+				}
+			}
+		}
+	}
+
+	private function onMouseDown(button:Int, x:Int, y:Int) {
 		if (button == 0)
 		{
-			HexHelper.pointyTopped = !HexHelper.pointyTopped;
+			currentLayout = (currentLayout + 1) % layouts.length;
 		}
 	}
 }

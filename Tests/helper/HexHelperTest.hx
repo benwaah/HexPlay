@@ -6,7 +6,6 @@ import massive.munit.async.AsyncFactory;
 
 import geom.Hex;
 import geom.Offset;
-import geom.Point;
 import helper.HexHelper;
 
 using helper.HexHelper;
@@ -14,50 +13,6 @@ using helper.HexHelper;
 class HexHelperTest
 {
 	public function new() {}
-
-	@Test
-	public function testHexCornerReturnsNonNullPoint():Void
-	{
-		var center = new Point();
-		for (i in 0 ... 6) {
-			var corner = HexHelper.hexCorner(center, 32, i);
-			Assert.isNotNull(corner);
-		}
-	}
-
-	@Test
-	public function testHexCornerReturnsNonNullPointUsing():Void
-	{
-		var center = new Point();
-		for (i in 0 ... 6) {
-			var corner = center.hexCorner(32, i);
-			Assert.isNotNull(corner);
-		}
-	}
-
-	@Test
-	public function testHexCornerisCycling():Void
-	{
-		var center = new Point();
-		for (i in 0 ... 6) {
-			var corner1 = HexHelper.hexCorner(center, 32, i);
-			var corner2 = HexHelper.hexCorner(center, 32, i + 6);
-			Assert.areEqual(corner1.x, corner2.x);
-			Assert.areEqual(corner1.y, corner2.y);
-		}
-	}
-
-	@Test
-	public function testHexCornerisCyclingUsing():Void
-	{
-		var center = new Point();
-		for (i in 0 ... 6) {
-			var corner1 = center.hexCorner(32, i);
-			var corner2 = center.hexCorner(32, i + 6);
-			Assert.areEqual(corner1.x, corner2.x);
-			Assert.areEqual(corner1.y, corner2.y);
-		}
-	}
 
 	@Test
 	public function testHexToOddRConversion():Void

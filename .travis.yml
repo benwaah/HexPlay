@@ -9,6 +9,7 @@ sudo: false
 install:
   - haxelib install munit > /dev/null
   - haxelib install kha > /dev/null
+  - haxelib install hxcpp > /dev/null
   - haxelib list
 
 script:

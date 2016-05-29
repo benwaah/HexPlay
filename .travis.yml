@@ -1,0 +1,17 @@
+language: haxe
+
+haxe:
+  - 3.2.1
+  - development
+
+sudo: false
+
+install:
+  - haxelib install munit > /dev/null
+  - haxelib install kha > /dev/null
+  - haxelib install hxcpp > /dev/null
+  - haxelib list
+
+script:
+  - haxelib run munit t -neko -result-exit-code
+  - haxelib run munit t -cpp -result-exit-code

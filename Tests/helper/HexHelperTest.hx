@@ -254,7 +254,6 @@ class HexHelperTest
 		var a = new Hex(-2, 1);
 		var b = new Hex(1, -1);
 		var path:Array<Hex> = a.lineDraw(b);
-		trace(path);
 		Assert.areEqual(4, path.length);
 		Assert.areEqual(0, a.distance(path[0]));
 		Assert.areEqual(a.q, path[0].q);
@@ -271,7 +270,6 @@ class HexHelperTest
 		var a = new Hex(1, 1);
 		var b = new Hex(2, 0);
 		var path:Array<Hex> = a.lineDraw(b);
-		trace(path);
 		Assert.areEqual(2, path.length);
 		Assert.areEqual(0, a.distance(path[0]));
 		Assert.areEqual(a.q, path[0].q);
@@ -286,7 +284,6 @@ class HexHelperTest
 		var a = new Hex(0, 0);
 		var b = new Hex(2, -1);
 		var path:Array<Hex> = a.lineDraw(b);
-		trace(path);
 		Assert.areEqual(3, path.length);
 		Assert.areEqual(0, a.distance(path[0]));
 		Assert.areEqual(a.q, path[0].q);

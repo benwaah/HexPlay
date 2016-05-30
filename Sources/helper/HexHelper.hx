@@ -1,5 +1,6 @@
 package helper;
 
+import geom.FractionalHex;
 import geom.Hex;
 import geom.Offset;
 
@@ -50,5 +51,38 @@ class HexHelper {
 
 	static public function neighbour(h:Hex, direction:Int) {
 		return add(h, Hex.direction(direction));
+	}
+
+	static public function roundHex(hex:FractionalHex):Hex {
+		var q = Math.round(hex.q);
+		var r = Math.round(hex.r);
+		var s = Math.round(hex.s);
+
+		var qDiff = Math.abs(q - hex.q);
+		var rDiff = Math.abs(r - hex.r);
+		var sDiff = Math.abs(s - hex.s);
+
+		if (qDiff > rDiff && qDiff > sDiff)
+			q = -r - s;
+		else if (rDiff > sDiff)
+			r = -q - s;
+		else
+			s = -q - r;
+		return new Hex(q, r, s);
+	}
+
+	static public function hexLerp(a:Hex, b:Hex, t:Float):FractionalHex {
+		return new FractionalHex(a.q + (b.q - a.q) * t,
+								 a.r + (b.r - a.r) * t,
+								 a.s + (b.s - a.s) * t);
+	}
+
+	static public function lineDraw(a:Hex, b:Hex):Array<Hex> {
+		var n:Int = distance(a, b);
+		var results:Array<Hex> = new Array<Hex>();
+		var step:Float = 1 / Math.max(n, 1);
+		for (i in 0...n+1)
+			results.push(roundHex(hexLerp(a, b, step * i)));
+		return results;
 	}
 }

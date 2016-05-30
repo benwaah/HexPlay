@@ -248,4 +248,52 @@ class HexHelperTest
 		Assert.areEqual(h.r, h5.neighbour(2).r);
 		Assert.areEqual(h.s, h5.neighbour(2).s);
 	}
+
+	@Test
+	public function testLineDraw():Void {
+		var a = new Hex(-2, 1);
+		var b = new Hex(1, -1);
+		var path:Array<Hex> = a.lineDraw(b);
+		trace(path);
+		Assert.areEqual(4, path.length);
+		Assert.areEqual(0, a.distance(path[0]));
+		Assert.areEqual(a.q, path[0].q);
+		Assert.areEqual(a.r, path[0].r);
+		Assert.areEqual(1, a.distance(path[1]));
+		Assert.areEqual(2, a.distance(path[2]));
+		Assert.areEqual(3, a.distance(path[3]));
+		Assert.areEqual(b.q, path[3].q);
+		Assert.areEqual(b.r, path[3].r);
+	}
+
+	@Test
+	public function testLineDraw2():Void {
+		var a = new Hex(1, 1);
+		var b = new Hex(2, 0);
+		var path:Array<Hex> = a.lineDraw(b);
+		trace(path);
+		Assert.areEqual(2, path.length);
+		Assert.areEqual(0, a.distance(path[0]));
+		Assert.areEqual(a.q, path[0].q);
+		Assert.areEqual(a.r, path[0].r);
+		Assert.areEqual(1, a.distance(path[1]));
+		Assert.areEqual(b.q, path[1].q);
+		Assert.areEqual(b.r, path[1].r);
+	}
+
+	@Test
+	public function testLineDraw3():Void {
+		var a = new Hex(0, 0);
+		var b = new Hex(2, -1);
+		var path:Array<Hex> = a.lineDraw(b);
+		trace(path);
+		Assert.areEqual(3, path.length);
+		Assert.areEqual(0, a.distance(path[0]));
+		Assert.areEqual(a.q, path[0].q);
+		Assert.areEqual(a.r, path[0].r);
+		Assert.areEqual(1, a.distance(path[1]));
+		Assert.areEqual(2, a.distance(path[2]));
+		Assert.areEqual(b.q, path[2].q);
+		Assert.areEqual(b.r, path[2].r);
+	}
 }

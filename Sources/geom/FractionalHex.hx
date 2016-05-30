@@ -8,9 +8,6 @@ class FractionalHex {
 	public function new(_q:Float, _r:Float, _s:Float) {
 		q = _q;
 		r = _r;
-		if (_s == null)
-			s = -q - r;
-		else
-			s = _s;
+		s = _s;
 	}
 }
